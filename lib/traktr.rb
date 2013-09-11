@@ -1,6 +1,7 @@
 require 'httparty'
 require 'mash'
 require 'json'
+require 'uri'
 
 module Traktr
   include HTTParty
@@ -12,5 +13,6 @@ require 'traktr/version'
 
 require 'traktr/account'
 require 'traktr/movie'
+require 'traktr/search'
 require 'traktr/show'
 require 'traktr/user'
