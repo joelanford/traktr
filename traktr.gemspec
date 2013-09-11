@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["joe.lanford@gmail.com"]
   spec.description   = %q{Implementation of the track.tv REST API.  See the documentation at http://trakt.tv/api-docs}
   spec.summary       = %q{Implementation of the track.tv REST API}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/joelanford/traktr"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
