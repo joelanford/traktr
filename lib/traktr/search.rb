@@ -33,8 +33,8 @@ module Traktr
       end
     end
 
-    def self.shows(query)
-      response = self.get('/' + File.join('shows.json', Traktr.api_key, URI::encode(query)))
+    def self.shows(query, limit = 30, seasons = nil)
+      response = self.get('/' + File.join('shows.json', Traktr.api_key, URI::encode(query), limit.to_s, seasons.to_s))
       raise ResponseError.new(response) if response.code != 200
 
       response.parsed_response.collect do |result|
