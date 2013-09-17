@@ -13,6 +13,8 @@ require 'traktr/version'
 
 require 'traktr/account'
 require 'traktr/movie'
+require 'traktr/movies'
 require 'traktr/search'
 require 'traktr/show'
+require 'traktr/shows'
 require 'traktr/user'
