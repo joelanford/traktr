@@ -13,27 +13,27 @@ describe Traktr::Search do
 
       it '#episodes' do
         results = Traktr::Search.episodes('warfare')
-        expect(results.size).to eql(30)
+        expect(results.size).to be > 0
       end
 
       it '#movies' do
         results = Traktr::Search.movies('Batman')
-        expect(results.size).to eql(29)
+        expect(results.size).to be > 0
       end
 
       it '#people' do
         results = Traktr::Search.people('christian bale')
-        expect(results.size).to eql(30)
+        expect(results.size).to be > 0
       end
 
       it '#shows' do
         results = Traktr::Search.shows('big bang theory')
-        expect(results.size).to eql(29)
+        expect(results.size).to be > 0
       end
 
       it '#users' do
         results = Traktr::Search.users('justin')
-        expect(results.size).to eql(22)
+        expect(results.size).to be > 0
       end
     end
 
