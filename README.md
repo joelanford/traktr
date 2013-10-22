@@ -32,21 +32,23 @@ Or install it yourself as:
 
 To interface with the Trakt API, you must create a client instance
 
-    API_KEY       = "abcdefghijklmnopqrstuvwxyz"
-    USERNAME      = "john_doe"
-    PASSWORD      = "p@ssw0rd"
-    SHA1_PASSWORD = "57b2ad99044d337197c0c39fd3823568ff81e48a"
+```ruby
+API_KEY       = "abcdefghijklmnopqrstuvwxyz"
+USERNAME      = "john_doe"
+PASSWORD      = "p@ssw0rd"
+SHA1_PASSWORD = "57b2ad99044d337197c0c39fd3823568ff81e48a"
 
-    # for non-authenticated methods, you can create an instance without supplying
-    # username and password
-    trakt = Traktr::Client.new(API_KEY)
+# for non-authenticated methods, you can create an instance without supplying
+# username and password
+trakt = Traktr::Client.new(API_KEY)
 
-    # if you need to use an authenticated method, you can provide your plaintext
-    # password
-    trakt = Traktr::Client.new(API_KEY, USERNAME, PASSWORD)
+# if you need to use an authenticated method, you can provide your plaintext
+# password
+trakt = Traktr::Client.new(API_KEY, USERNAME, PASSWORD)
 
-    # or the SHA1 hash of your password
-    trakt = Traktr::Client.new(API_KEY, USERNAME, SHA1_PASSWORD, true)
+# or the SHA1 hash of your password
+trakt = Traktr::Client.new(API_KEY, USERNAME, SHA1_PASSWORD, true)
+```
 
 From there, just string together method calls that match the Trakt API endpoints!
 It's that easy (aka, I need to add more documentation here).  See the RSpec tests
