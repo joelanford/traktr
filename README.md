@@ -1,6 +1,7 @@
 # Traktr
 
 Traktr is a ruby client API for the trakt.tv RESTful web service.  Trakt allows users to:
+
 1. Automatically track what you're watching
 2. Track your progress and see what's on tonight
 3. Catalog your entire media collection
@@ -10,6 +11,8 @@ Traktr is a ruby client API for the trakt.tv RESTful web service.  Trakt allows 
 7. Organize lists of your favorite shows and movies to make sure you don't forget them
 
 This client API supports all non-DEV REST methods.  (If you need the DEV methods, submit a pull request!)
+
+The full API documentation can be found at http://trakt.tv/api-docs
 
 ## Installation
 
