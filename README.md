@@ -40,19 +40,41 @@ SHA1_PASSWORD = "57b2ad99044d337197c0c39fd3823568ff81e48a"
 
 # for non-authenticated methods, you can create an instance without supplying
 # username and password
-trakt = Traktr::Client.new(API_KEY)
+@trakt = Traktr::Client.new(API_KEY)
 
 # if you need to use an authenticated method, you can provide your plaintext
 # password
-trakt = Traktr::Client.new(API_KEY, USERNAME, PASSWORD)
+@trakt = Traktr::Client.new(API_KEY, USERNAME, PASSWORD)
 
 # or the SHA1 hash of your password
-trakt = Traktr::Client.new(API_KEY, USERNAME, SHA1_PASSWORD, true)
+@trakt = Traktr::Client.new(API_KEY, USERNAME, SHA1_PASSWORD, true)
 ```
 
-From there, just string together method calls that match the Trakt API endpoints!
-It's that easy (aka, I need to add more documentation here).  See the RSpec tests
-for examples of all of the supported methods.
+To get summary info about a movie, use the ```movie.summary``` method:
+
+```ruby
+# you can use the trakt.tv slug, IMDB ID, or TMDB ID
+tdk = @trakt.movie.summary('the-dark-knight-2008')
+
+# tdk is a Mash object that has methods for each field in the summary:
+tdk.title
+tdk.year
+tdk.released
+tdk.url
+tdk.trailer
+tdk.runtime
+# etc ...
+```
+
+To search for a movie, use the ```search.movies``` method.
+
+```ruby
+# returns an array of movie summary results
+results = @trakt.search.movies("Dark Knight")
+results.each do |r|
+  puts r.title
+end
+```
 
 ## Contributing
 
