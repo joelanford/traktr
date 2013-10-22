@@ -4,8 +4,8 @@ module Traktr
       include HTTParty
       base_uri File.join(Traktr::User.base_uri, 'ratings')
 
-      def self.episodes(username = Traktr.username, rating = :all, extended = :min)
-        response = self.get('/' + File.join('episodes.json', Traktr.api_key, username, rating.to_s, extended.to_s))
+      def episodes(username = @client.username, rating = :all, extended = :min)
+        response = self.class.get('/' + File.join('episodes.json', @client.api_key, username, rating.to_s, extended.to_s))
         raise ResponseError.new(response) if response.code != 200
 
         response.parsed_response.collect do |item|
@@ -13,8 +13,8 @@ module Traktr
         end
       end
 
-      def self.movies(username = Traktr.username, rating = :all, extended = :min)
-        response = self.get('/' + File.join('movies.json', Traktr.api_key, username, rating.to_s, extended.to_s))
+      def movies(username = @client.username, rating = :all, extended = :min)
+        response = self.class.get('/' + File.join('movies.json', @client.api_key, username, rating.to_s, extended.to_s))
         raise ResponseError.new(response) if response.code != 200
 
         response.parsed_response.collect do |item|
@@ -22,8 +22,8 @@ module Traktr
         end
       end
 
-      def self.shows(username = Traktr.username, rating = :all, extended = :min)
-        response = self.get('/' + File.join('shows.json', Traktr.api_key, username, rating.to_s, extended.to_s))
+      def shows(username = @client.username, rating = :all, extended = :min)
+        response = self.class.get('/' + File.join('shows.json', @client.api_key, username, rating.to_s, extended.to_s))
         raise ResponseError.new(response) if response.code != 200
 
         response.parsed_response.collect do |item|

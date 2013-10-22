@@ -1,13 +1,17 @@
 module Traktr
-  module Search
+  class Search
     include HTTParty
     base_uri File.join(Traktr.base_uri, 'search')
 
+    def initialize(client)
+      @client = client
+    end
+    
     ##
     ## search GET methods
     ##
-    def self.episodes(query)
-      response = self.get('/' + File.join('episodes.json', Traktr.api_key, URI::encode(query)))
+    def episodes(query)
+      response = self.class.get('/' + File.join('episodes.json', @client.api_key, URI::encode(query)))
       raise ResponseError.new(response) if response.code != 200
 
       response.parsed_response.collect do |result|
@@ -15,8 +19,8 @@ module Traktr
       end
     end
 
-    def self.movies(query)
-      response = self.get('/' + File.join('movies.json', Traktr.api_key, URI::encode(query)))
+    def movies(query)
+      response = self.class.get('/' + File.join('movies.json', @client.api_key, URI::encode(query)))
       raise ResponseError.new(response) if response.code != 200
 
       response.parsed_response.collect do |result|
@@ -24,8 +28,8 @@ module Traktr
       end
     end
 
-    def self.people(query)
-      response = self.get('/' + File.join('people.json', Traktr.api_key, URI::encode(query)))
+    def people(query)
+      response = self.class.get('/' + File.join('people.json', @client.api_key, URI::encode(query)))
       raise ResponseError.new(response) if response.code != 200
 
       response.parsed_response.collect do |result|
@@ -33,8 +37,8 @@ module Traktr
       end
     end
 
-    def self.shows(query, limit = 30, seasons = nil)
-      response = self.get('/' + File.join('shows.json', Traktr.api_key, URI::encode(query), limit.to_s, seasons.to_s))
+    def shows(query, limit = 30, seasons = nil)
+      response = self.class.get('/' + File.join('shows.json', @client.api_key, URI::encode(query), limit.to_s, seasons.to_s))
       raise ResponseError.new(response) if response.code != 200
 
       response.parsed_response.collect do |result|
@@ -42,8 +46,8 @@ module Traktr
       end
     end
 
-    def self.users(query)
-      response = self.get('/' + File.join('users.json', Traktr.api_key, URI::encode(query)))
+    def users(query)
+      response = self.class.get('/' + File.join('users.json', @client.api_key, URI::encode(query)))
       raise ResponseError.new(response) if response.code != 200
 
       response.parsed_response.collect do |result|

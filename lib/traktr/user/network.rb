@@ -4,8 +4,8 @@ module Traktr
       include HTTParty
       base_uri File.join(Traktr::User.base_uri, 'network')
 
-      def self.followers(username = Traktr.username)
-        response = self.get('/' + File.join('followers.json', Traktr.api_key, username))
+      def followers(username = @client.username)
+        response = self.class.get('/' + File.join('followers.json', @client.api_key, username))
         raise ResponseError.new(response) if response.code != 200
 
         response.parsed_response.collect do |item|
@@ -13,8 +13,8 @@ module Traktr
         end
       end
 
-      def self.following(username = Traktr.username)
-        response = self.get('/' + File.join('following.json', Traktr.api_key, username))
+      def following(username = @client.username)
+        response = self.class.get('/' + File.join('following.json', @client.api_key, username))
         raise ResponseError.new(response) if response.code != 200
 
         response.parsed_response.collect do |item|
@@ -22,8 +22,8 @@ module Traktr
         end
       end
 
-      def self.friends(username = Traktr.username)
-        response = self.get('/' + File.join('friends.json', Traktr.api_key, username))
+      def friends(username = @client.username)
+        response = self.class.get('/' + File.join('friends.json', @client.api_key, username))
         raise ResponseError.new(response) if response.code != 200
 
         response.parsed_response.collect do |item|

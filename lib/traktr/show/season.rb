@@ -1,31 +1,35 @@
 module Traktr
-  module Show
-    module Season
+  class Show
+    class Season
       include HTTParty
       base_uri File.join(Traktr::Show.base_uri, "season")
 
+      def initialize(client)
+        @client = client
+      end
+      
       ##
       ## show-season POST methods
       ##
-      def self.library(show, season)
+      def library(show, season)
         data = {
-            username: Traktr.username, password: Traktr.password,
+            username: @client.username, password: @client.password,
             title: show.title, year: show.year, imdb_id: show.imdb_id, tvdb_id: show.tvdb_id,
             season: season
         }
-        response = self.post("/" + File.join("library", Traktr.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
+        response = self.class.post("/" + File.join("library", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
         raise ResponseError.new(response) if response.code != 200
 
         Mash.new(response.parsed_response)
       end
 
-      def self.seen(show, season)
+      def seen(show, season)
         data = {
-            username: Traktr.username, password: Traktr.password,
+            username: @client.username, password: @client.password,
             title: show.title, year: show.year, imdb_id: show.imdb_id, tvdb_id: show.tvdb_id,
             season: season
         }
-        response = self.post("/" + File.join("seen", Traktr.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
+        response = self.class.post("/" + File.join("seen", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
         raise ResponseError.new(response) if response.code != 200
 
         Mash.new(response.parsed_response)

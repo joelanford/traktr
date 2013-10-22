@@ -1,13 +1,26 @@
 module Traktr
-  module Show
+  class Show
     include HTTParty
     base_uri File.join(Traktr.base_uri, "show")
+
+    def initialize(client)
+      @client = client
+    end
+
+    def episode
+      @episode ||= Traktr::Show::Episode.new(@client)
+    end
+
+    def season
+      
+
+    end
 
     ##
     ## show GET methods
     ##
-    def self.comments(title, type = :all)
-      response = self.get("/" + File.join("comments.json", Traktr.api_key, title, type.to_s))
+    def comments(title, type = :all)
+      response = self.class.get("/" + File.join("comments.json", @client.api_key, title, type.to_s))
       raise ResponseError.new(response) if response.code != 200
 
       response.parsed_response.collect do |comment|
@@ -15,8 +28,8 @@ module Traktr
       end
     end
 
-    def self.related(title, hidewatched = false)
-      response = self.get("/" + File.join("related.json", Traktr.api_key, title, hidewatched.to_s))
+    def related(title, hidewatched = false)
+      response = self.class.get("/" + File.join("related.json", @client.api_key, title, hidewatched.to_s))
       raise ResponseError.new(response) if response.code != 200
 
       response.parsed_response.collect do |summary|
@@ -24,17 +37,23 @@ module Traktr
       end
     end
 
-    def self.season(title, season)
-      response = self.get("/" + File.join("season.json", Traktr.api_key, title, season.to_s))
-      raise ResponseError.new(response) if response.code != 200
+    def season(title = nil, season = nil)
+      if title && season
+        response = self.class.get("/" + File.join("season.json", @client.api_key, title, season.to_s))
+        raise ResponseError.new(response) if response.code != 200
 
-      response.parsed_response.collect do |episode|
-        Mash.new(episode)
+        response.parsed_response.collect do |episode|
+          Mash.new(episode)
+        end
+      elsif !title && !season
+        @season ||= Traktr::Show::Season.new(@client)
+      else
+        raise ArgumentError.new("wrong number of arguments")
       end
     end
 
-    def self.seasons(title)
-      response = self.get("/" + File.join("seasons.json", Traktr.api_key, title))
+    def seasons(title)
+      response = self.class.get("/" + File.join("seasons.json", @client.api_key, title))
       raise ResponseError.new(response) if response.code != 200
 
       response.parsed_response.collect do |season|
@@ -42,16 +61,16 @@ module Traktr
       end
     end
 
-    def self.summary(title, extended = :min)
-      response = self.get("/" + File.join("summary.json", Traktr.api_key, title, extended.to_s))
+    def summary(title, extended = :min)
+      response = self.class.get("/" + File.join("summary.json", @client.api_key, title, extended.to_s))
       raise ResponseError.new(response) if response.code != 200
 
       Mash.new(response.parsed_response)
     end
 
-    def self.summaries(titles, extended = :min)
+    def summaries(titles, extended = :min)
       titles = [titles] if titles.class == String
-      response = self.get("/" + File.join("summaries.json", Traktr.api_key, titles.join(","), extended.to_s))
+      response = self.class.get("/" + File.join("summaries.json", @client.api_key, titles.join(","), extended.to_s))
       raise ResponseError.new(response) if response.code != 200
 
       response.parsed_response.collect do |summary|
@@ -59,8 +78,8 @@ module Traktr
       end
     end
 
-    def self.watchingnow(title)
-      response = self.get("/" + File.join("watchingnow.json", Traktr.api_key, title))
+    def watchingnow(title)
+      response = self.class.get("/" + File.join("watchingnow.json", @client.api_key, title))
       raise ResponseError.new(response) if response.code != 200
 
       response.parsed_response.collect do |user|
@@ -71,64 +90,61 @@ module Traktr
     ##
     ## show POST methods
     ##
-    def self.library(show)
+    def library(show)
       data = {
-          username: Traktr.username, password: Traktr.password,
+          username: @client.username, password: @client.password,
           title: show.title, year: show.year, imdb_id: show.imdb_id, tvdb_id: show.tvdb_id,
       }
-      response = self.post("/" + File.join("library", Traktr.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
+      response = self.class.post("/" + File.join("library", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       raise ResponseError.new(response) if response.code != 200
 
       Mash.new(response.parsed_response)
     end
 
-    def self.unlibrary(show)
+    def unlibrary(show)
       data = {
-          username: Traktr.username, password: Traktr.password,
+          username: @client.username, password: @client.password,
           title: show.title, year: show.year, imdb_id: show.imdb_id, tvdb_id: show.tvdb_id,
       }
-      response = self.post("/" + File.join("unlibrary", Traktr.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
+      response = self.class.post("/" + File.join("unlibrary", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       raise ResponseError.new(response) if response.code != 200
 
       Mash.new(response.parsed_response)
     end
 
-    def self.watchlist(shows)
+    def watchlist(shows)
       shows = [ shows ] if shows.class != Array
       data = {
-          username: Traktr.username, password: Traktr.password,
+          username: @client.username, password: @client.password,
           shows: shows.collect{ |s| { title: s.title, year: s.year, imdb_id: s.imdb_id, tvdb_id: s.tvdb_id }}
       }
-      response = self.post("/" + File.join("watchlist", Traktr.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
+      response = self.class.post("/" + File.join("watchlist", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       raise ResponseError.new(response) if response.code != 200
 
       Mash.new(JSON.parse(response.parsed_response))
     end
 
-    def self.unwatchlist(shows)
+    def unwatchlist(shows)
       shows = [ shows ] if shows.class != Array
       data = {
-          username: Traktr.username, password: Traktr.password,
+          username: @client.username, password: @client.password,
           shows: shows.collect{ |s| { title: s.title, year: s.year, imdb_id: s.imdb_id, tvdb_id: s.tvdb_id }}
       }
-      response = self.post("/" + File.join("unwatchlist", Traktr.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
+      response = self.class.post("/" + File.join("unwatchlist", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       raise ResponseError.new(response) if response.code != 200
 
       Mash.new(response.parsed_response)
     end
 
-    def self.seen(show)
+    def seen(show)
       data = {
-          username: Traktr.username, password: Traktr.password,
+          username: @client.username, password: @client.password,
           title: show.title, year: show.year, imdb_id: show.imdb_id, tvdb_id: show.tvdb_id,
       }
-      response = self.post("/" + File.join("seen", Traktr.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
+      response = self.class.post("/" + File.join("seen", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       raise ResponseError.new(response) if response.code != 200
 
       Mash.new(response.parsed_response)
     end
   end
 end
-
-require 'traktr/show/episode'
-require 'traktr/show/season'

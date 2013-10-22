@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Traktr::VERSION
   spec.authors       = ["Joe Lanford"]
   spec.email         = ["joe.lanford@gmail.com"]
-  spec.description   = %q{Implementation of the track.tv REST API.  See the documentation at http://trakt.tv/api-docs}
-  spec.summary       = %q{Implementation of the track.tv REST API}
+  spec.description   = %q{Implementation of the trakt.tv REST API.  See the documentation at http://trakt.tv/api-docs}
+  spec.summary       = %q{Implementation of the trakt.tv REST API}
   spec.homepage      = "https://github.com/joelanford/traktr"
   spec.license       = "MIT"
 
