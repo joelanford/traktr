@@ -147,14 +147,5 @@ module Traktr
       Mash.new(response.parsed_response)
     end
 
-    def scrobble(show)
-      data = {
-              username: @client.username, password: @client.password, title: show.title, year: show.year, imdb_id: show.imdb_id, tvdb_id: show.tvdb_id, season: show.season, episode: show.season, duration: show.duration, progress: show.progress, plugin_version: @client.plugin_version, media_center_version: @client.media_center_version, media_center_date: @client.media_center_date,
-             }
-      response = self.class.post("/" + File.join("scrobble", @client.api_key), body: data.to_json, headers: {'Content-Type' => 'application/json'})
-      raise ResponseError.new(response) if response.code != 200
-
-      Mash.new(response.parsed_response)
-    end
   end
 end
