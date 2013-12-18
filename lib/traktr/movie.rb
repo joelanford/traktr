@@ -64,5 +64,28 @@ module Traktr
       data = @auth.merge({ :movies => movies })
       parse_response self.class.post('/' + File.join('unseen', @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
     end
+
+    def watching(data)
+      data.merge!(@auth)
+      parse_response self.class.post('/' + File.join('watching', @client.api_key), body: data.to_json, headers: {'Content-Type' => 'application/json'})
+    end
+
+    def scrobble(data)
+      data.merge!(@auth)
+      parse_response self.class.post('/' + File.join('scrobble', @client.api_key), body: data.to_json, headers: {'Content-Type' => 'application/json'})
+    end
+
+    def checkin(data)
+      data.merge!(@auth)
+      parse_response self.class.post('/' + File.join('checkin', @client.api_key), body: data.to_json, headers: {'Content-Type' => 'application/json'})
+    end
+
+    def cancelwatching
+      parse_response self.class.post('/' + File.join('cancelwatching', @client.api_key), body: @auth.to_json, headers: {'Content-Type' => 'application/json'})
+    end
+
+    def cancelcheckin
+      parse_response self.class.post('/' + File.join('cancelcheckin', @client.api_key), body: @auth.to_json, headers: {'Content-Type' => 'application/json'})
+    end
   end
 end

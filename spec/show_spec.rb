@@ -121,6 +121,10 @@ describe Traktr::Show do
     before :all do
       trakt = Traktr::Client.new(API_KEY)
       @show = trakt.show.summary('dexter')
+      @scrobble = @show.merge({ :season => 1, :episode => 1, :duration => 60,
+                                :progress => 25, :plugin_version => "0.0.1",
+                                :media_center_version => "0.0.1",
+                                :media_center_date => "Jan 01 1970" })
     end
 
     context 'with valid api_key and auth credentials' do
@@ -146,6 +150,31 @@ describe Traktr::Show do
 
       it '#seen' do
         expect( @trakt.show.seen(@show).status ).to eql('success')
+      end
+
+      it '#watching' do
+        pending("Pending valid developer API key")
+        expect( @trakt.show.watching(@scrobble).status ).to eql('success')
+      end
+
+      it '#scrobble' do
+        pending("Pending valid developer API key")
+        expect( @trakt.show.scrobble(@scrobble).status ).to eql('success')
+      end
+
+      it '#checkin' do
+        pending("Pending valid developer API key")
+        expect( @trakt.show.checkin(@scrobble).status ).to eql('success')
+      end
+
+      it '#cancelwatching' do
+        pending("Pending valid developer API key")
+        expect( @trakt.show.cancelwatching.status ).to eql('success')
+      end
+
+      it '#cancelcheckin' do
+        pending("Pending valid developer API key")
+        expect( @trakt.show.cancelcheckin.status ).to eql('success')
       end
     end
 
@@ -173,6 +202,26 @@ describe Traktr::Show do
       it '#seen' do
         expect { @trakt.show.seen(@show) }.to raise_error(Traktr::ResponseError)
       end
+
+      it '#watching' do
+        expect { @trakt.show.watching(@scrobble) }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#scrobble' do
+        expect { @trakt.show.scrobble(@scrobble) }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#checkin' do
+        expect { @trakt.show.checkin(@scrobble) }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#cancelwatching' do
+        expect { @trakt.show.cancelwatching }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#cancelcheckin' do
+        expect { @trakt.show.cancelcheckin }.to raise_error(Traktr::ResponseError)
+      end
     end
 
     context 'without valid auth credentials' do
@@ -198,6 +247,26 @@ describe Traktr::Show do
 
       it '#seen' do
         expect { @trakt.show.seen(@show) }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#watching' do
+        expect { @trakt.show.watching(@scrobble) }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#scrobble' do
+        expect { @trakt.show.scrobble(@scrobble) }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#checkin' do
+        expect { @trakt.show.checkin(@scrobble) }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#cancelwatching' do
+        expect { @trakt.show.cancelwatching }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#cancelcheckin' do
+        expect { @trakt.show.cancelcheckin }.to raise_error(Traktr::ResponseError)
       end
     end
   end
