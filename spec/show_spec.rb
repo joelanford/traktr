@@ -139,6 +139,10 @@ describe Traktr::Show do
       it '#scrobble' do
         expect( @trakt.show.scrobble(@show, 1, 1, 85, "0.1", 'Dec 22 2013').status ).to eql('success')
       end
+
+      it '#checkin' do
+        expect( @trakt.show.checkin(@show, 1, 1, "0.1", "Dec 22 2013").status ).to eql('success')
+      end
     end
 
     context 'without valid api_key' do
@@ -169,6 +173,10 @@ describe Traktr::Show do
       it '#scrobble' do
         expect { @trakt.show.scrobble(@show, 1, 1, 85, "0.1", 'Dec 22 2013') }.to raise_error(Traktr::ResponseError)
       end
+
+      it '#checkin' do
+        expect { @trakt.show.checkin(@show, 1, 1, "0.1", "Dec 22 2013") }.to raise_error(Traktr::ResponseError)
+      end
     end
 
     context 'without valid auth credentials' do
@@ -198,6 +206,10 @@ describe Traktr::Show do
       
       it '#scrobble' do
         expect { @trakt.show.scrobble(@show, 1, 1, 85, "0.1", "Dec 22 2013") }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#checkin' do
+        expect { @trakt.show.checkin(@show, 1, 1, "0.1", "Dec 22 2013") }.to raise_error(Traktr::ResponseError)
       end
     end
   end
