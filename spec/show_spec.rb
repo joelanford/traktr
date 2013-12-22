@@ -137,7 +137,7 @@ describe Traktr::Show do
       end
 
       it '#scrobble' do
-        expect( @trakt.show.scrobble(@show, 1, 1, 100, "0.1", 'Dec 22 2013').status ).to eql('success')
+        expect( @trakt.show.scrobble(@show, 1, 1, 85, "0.1", 'Dec 22 2013').status ).to eql('success')
       end
     end
 
@@ -167,7 +167,7 @@ describe Traktr::Show do
       end
 
       it '#scrobble' do
-        expect { @trakt.show.scrobble(@show, 1, 1, 100, "0.1", 'Dec 22 2013') }.to raise_error(Traktr::ResponseError)
+        expect { @trakt.show.scrobble(@show, 1, 1, 85, "0.1", 'Dec 22 2013') }.to raise_error(Traktr::ResponseError)
       end
     end
 
