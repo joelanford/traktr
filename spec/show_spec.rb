@@ -147,6 +147,14 @@ describe Traktr::Show do
       it '#checkin' do
         expect( @trakt.show.checkin(@show, 1, 1, "0.1", "Dec 22 2013").status ).to eql('success')
       end
+
+      it '#cancelwatching' do
+        expect { @trakt.show.cancelwatching }.to raise_error(Traktr::ResponseError)
+      end
+      
+      it '#cancelcheckin' do
+        expect { @trakt.show.cancelcheckin }.to raise_error(Traktr::ResponseError)
+      end
     end
 
     context 'without valid api_key' do
@@ -185,6 +193,14 @@ describe Traktr::Show do
       it '#checkin' do
         expect { @trakt.show.checkin(@show, 1, 1, "0.1", "Dec 22 2013") }.to raise_error(Traktr::ResponseError)
       end
+
+      it '#cancelwatching' do
+        expect { @trakt.show.cancelwatching }.to raise_error(Traktr::ResponseError)
+      end
+      
+      it '#cancelcheckin' do
+        expect { @trakt.show.cancelcheckin }.to raise_error(Traktr::ResponseError)
+      end
     end
 
     context 'without valid auth credentials' do
@@ -222,6 +238,14 @@ describe Traktr::Show do
 
       it '#checkin' do
         expect { @trakt.show.checkin(@show, 1, 1, "0.1", "Dec 22 2013") }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#cancelwatching' do
+        expect { @trakt.show.cancelwatching }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#cancelcheckin' do
+        expect { @trakt.show.cancelcheckin }.to raise_error(Traktr::ResponseError)
       end
     end
   end

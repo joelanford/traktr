@@ -177,5 +177,25 @@ module Traktr
 
       Mash.new(response.parsed_response)
     end
+
+    def cancelwatching
+      data = {
+              username: @client.username, password: @client.password,
+             }
+      response = self.class.post("/" + File.join("cancelwatching", @client.api_key), body: data.to_json, headers: {'Content-Type' => 'application/json'})
+      raise ResponseError.new(response) if response.code != 200
+
+      Mash.new(response.parsed_response)
+    end
+
+    def cancelcheckin
+      data = {
+              username: @client.username, password: @client.password,
+             }
+      response = self.class.post("/" + File.join("cancelcheckin", @client.api_key), body: data.to_json, headers: {'Content-Type' => 'application/json'})
+      raise ResponseError.new(response) if response.code != 200
+
+      Mash.new(response.parsed_response)
+    end
   end
 end
