@@ -149,11 +149,11 @@ describe Traktr::Show do
       end
 
       it '#cancelwatching' do
-        expect { @trakt.show.cancelwatching }.to raise_error(Traktr::ResponseError)
+        expect ( @trakt.show.cancelwatching ).to eql('success')
       end
       
       it '#cancelcheckin' do
-        expect { @trakt.show.cancelcheckin }.to raise_error(Traktr::ResponseError)
+        expect ( @trakt.show.cancelcheckin ).to eql('success')
       end
     end
 
