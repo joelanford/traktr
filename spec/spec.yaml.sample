@@ -1,0 +1,7 @@
+#
+# WARNING: This account is used for automated unit testing.
+#          Do not use your normal Trakt user account!
+#
+api_key: "<TRAKT_API_KEY>"
+username: "<TRAKT_USERNAME>"
+password: "<TRAKT_PASSWORD>"

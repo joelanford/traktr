@@ -6,9 +6,15 @@ end
 
 require 'traktr'
 
-API_KEY  = 'ec39665f9e31eb8c00de2aec74c755bf'
-USERNAME = 'test.joe.lanford'
-PASSWORD = 'test1234'
+if File.exist?(File.join(File.dirname(__FILE__), "spec.yaml"))
+  config   = YAML.load_file(File.join(File.dirname(__FILE__), "spec.yaml"))
+  API_KEY  = config["api_key"]
+  USERNAME = config["username"]
+  PASSWORD = config["password"]
+else
+  $stderr.puts "ERROR: You must configure the 'spec.yaml' file in the spec directory!"
+  exit 1
+end
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
