@@ -11,11 +11,6 @@ module Traktr
       @episode ||= Traktr::Show::Episode.new(@client)
     end
 
-    def season
-      
-
-    end
-
     ##
     ## show GET methods
     ##
