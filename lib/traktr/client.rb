@@ -1,6 +1,8 @@
 require 'digest/sha1'
 
 require 'traktr/account'
+require 'traktr/activity'
+require 'traktr/activity/user'
 require 'traktr/movie'
 require 'traktr/movies'
 require 'traktr/search'
@@ -24,6 +26,10 @@ module Traktr
 
     def account
       @account ||= Traktr::Account.new(self)
+    end
+
+    def activity
+      @activity ||= Traktr::Activity.new(self)
     end
 
     def movie
