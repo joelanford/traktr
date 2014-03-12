@@ -4,7 +4,7 @@ require 'traktr/account'
 require 'traktr/activity'
 require 'traktr/activity/user'
 require 'traktr/calendar'
-#require 'traktr/comment'
+require 'traktr/comment'
 #require 'traktr/genres'
 #require 'traktr/lists'
 require 'traktr/movie'
@@ -42,6 +42,10 @@ module Traktr
 
     def calendar
       @calendar ||= Traktr::Calendar.new(self)
+    end
+
+    def comment
+      @comment ||= Traktr::Comment.new(self)
     end
 
     def movie
