@@ -3,9 +3,17 @@ require 'digest/sha1'
 require 'traktr/account'
 require 'traktr/activity'
 require 'traktr/activity/user'
+require 'traktr/calendar'
+#require 'traktr/comment'
+#require 'traktr/genres'
+#require 'traktr/lists'
 require 'traktr/movie'
 require 'traktr/movies'
+#require 'traktr/network'
+#require 'traktr/rate'
+#require 'traktr/recommendations'
 require 'traktr/search'
+#require 'traktr/server'
 require 'traktr/show'
 require 'traktr/show/episode'
 require 'traktr/show/season'
@@ -30,6 +38,10 @@ module Traktr
 
     def activity
       @activity ||= Traktr::Activity.new(self)
+    end
+
+    def calendar
+      @calendar ||= Traktr::Calendar.new(self)
     end
 
     def movie
