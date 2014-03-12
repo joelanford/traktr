@@ -5,7 +5,7 @@ require 'traktr/activity'
 require 'traktr/activity/user'
 require 'traktr/calendar'
 require 'traktr/comment'
-#require 'traktr/genres'
+require 'traktr/genres'
 #require 'traktr/lists'
 require 'traktr/movie'
 require 'traktr/movies'
@@ -46,6 +46,10 @@ module Traktr
 
     def comment
       @comment ||= Traktr::Comment.new(self)
+    end
+
+    def genres
+      @genres ||= Traktr::Genres.new(self)
     end
 
     def movie
