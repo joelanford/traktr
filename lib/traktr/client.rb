@@ -13,7 +13,7 @@ require 'traktr/movies'
 #require 'traktr/rate'
 #require 'traktr/recommendations'
 require 'traktr/search'
-#require 'traktr/server'
+require 'traktr/server'
 require 'traktr/show'
 require 'traktr/show/episode'
 require 'traktr/show/season'
@@ -62,6 +62,10 @@ module Traktr
 
     def search
       @search ||= Traktr::Search.new(self)
+    end
+
+    def server
+      @server ||= Traktr::Server.new(self)
     end
 
     def show
