@@ -5,52 +5,68 @@ module Traktr
 
     def initialize(client)
       @client = client
+      @auth = { :username => @client.username, :password => @client.password }
     end
 
     ##
     ## movie GET methods
     ##
     def comments(title, type = :all)
-      response = self.class.get('/' + File.join('comments.json', @client.api_key, title, type.to_s))
+      type = [:all, :shouts, :reviews].include?(type) ? type.to_s : ""
+
+      response = self.class.get('/' + File.join('comments.json', @client.api_key, title, type))
       raise ResponseError.new(response) if response.code != 200
 
-      response.parsed_response.collect do |comment|
-        Mash.new(comment)
+      response.parsed_response.collect do |data|
+        Mash.new(data)
       end
     end
 
-    def related(title, hidewatched = false)
-      response = self.class.get('/' + File.join('related.json', @client.api_key, title, hidewatched.to_s))
+    def related(title, hidewatched = nil)
+      hidewatched = hidewatched == false || hidewatched == nil ? "" : "hidewatched"
+
+      response = self.class.get('/' + File.join('related.json', @client.api_key, title, hidewatched), :basic_auth => @auth)
       raise ResponseError.new(response) if response.code != 200
 
-      response.parsed_response.collect do |summary|
-        Mash.new(summary)
+      response.parsed_response.collect do |data|
+        Mash.new(data)
       end
     end
 
-    def summary(title, extended = :min)
-      response = self.class.get('/' + File.join('summary.json', @client.api_key, title.to_s, extended.to_s))
+    def stats(title)
+      response = self.class.get('/' + File.join('stats.json', @client.api_key, title))
       raise ResponseError.new(response) if response.code != 200
 
       Mash.new(response.parsed_response)
     end
 
-    def summaries(titles, extended = :min)
-      titles = [titles] if titles.class == String
-      response = self.class.get('/' + File.join('summaries.json', @client.api_key, titles.join(','), extended.to_s))
+    def summary(title, extended = nil)
+      extended = [:normal, :full].include?(extended) ? extended.to_s : ""
+
+      response = self.class.get('/' + File.join('summary.json', @client.api_key, title.to_s, extended), :basic_auth => @auth)
       raise ResponseError.new(response) if response.code != 200
 
-      response.parsed_response.collect do |summary|
-        Mash.new(summary)
+      Mash.new(response.parsed_response)
+    end
+
+    def summaries(titles, extended = nil)
+      titles   = titles.join(",") if titles.class == Array
+      extended = [:normal, :full].include?(extended) ? extended.to_s : ""
+
+      response = self.class.get('/' + File.join('summaries.json', @client.api_key, titles, extended))
+      raise ResponseError.new(response) if response.code != 200
+
+      response.parsed_response.collect do |data|
+        Mash.new(data)
       end
     end
 
     def watchingnow(title)
-      response = self.class.get('/' + File.join('watchingnow.json', @client.api_key, title))
+      response = self.class.get('/' + File.join('watchingnow.json', @client.api_key, title), :basic_auth => @auth)
       raise ResponseError.new(response) if response.code != 200
 
-      response.parsed_response.collect do |user|
-        Mash.new(user)
+      response.parsed_response.collect do |data|
+        Mash.new(data)
       end
     end
 
@@ -59,10 +75,8 @@ module Traktr
     ##
     def library(movies)
       movies = [ movies ] if movies.class != Array
-      data = {
-          username: @client.username, password: @client.password,
-          movies: movies.collect{ |s| { title: s.title, year: s.year, imdb_id: s.imdb_id, tmdb_id: s.tmdb_id }}
-      }
+      data = @auth.merge({ movies: movies })
+
       response = self.class.post('/' + File.join('library', @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       raise ResponseError.new(response) if response.code != 200
 
@@ -71,10 +85,8 @@ module Traktr
 
     def unlibrary(movies)
       movies = [ movies ] if movies.class != Array
-      data = {
-          username: @client.username, password: @client.password,
-          movies: movies.collect{ |s| { title: s.title, year: s.year, imdb_id: s.imdb_id, tmdb_id: s.tmdb_id }}
-      }
+      data = @auth.merge({ movies: movies })
+
       response = self.class.post('/' + File.join('unlibrary', @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       raise ResponseError.new(response) if response.code != 200
 
@@ -83,10 +95,8 @@ module Traktr
 
     def watchlist(movies)
       movies = [ movies ] if movies.class != Array
-      data = {
-          username: @client.username, password: @client.password,
-          movies: movies.collect{ |s| { title: s.title, year: s.year, imdb_id: s.imdb_id, tmdb_id: s.tmdb_id }}
-      }
+      data = @auth.merge({ movies: movies })
+
       response = self.class.post('/' + File.join('watchlist', @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       raise ResponseError.new(response) if response.code != 200
 
@@ -95,10 +105,8 @@ module Traktr
 
     def unwatchlist(movies)
       movies = [ movies ] if movies.class != Array
-      data = {
-          username: @client.username, password: @client.password,
-          movies: movies.collect{ |s| { title: s.title, year: s.year, imdb_id: s.imdb_id, tmdb_id: s.tmdb_id }}
-      }
+      data = @auth.merge({ movies: movies })
+
       response = self.class.post('/' + File.join('unwatchlist', @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       raise ResponseError.new(response) if response.code != 200
 
@@ -107,10 +115,8 @@ module Traktr
 
     def seen(movies)
       movies = [ movies ] if movies.class != Array
-      data = {
-          username: @client.username, password: @client.password,
-          movies: movies.collect{ |s| { title: s.title, year: s.year, imdb_id: s.imdb_id, tmdb_id: s.tmdb_id }}
-      }
+      data = @auth.merge({ movies: movies })
+
       response = self.class.post('/' + File.join('seen', @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       raise ResponseError.new(response) if response.code != 200
 
@@ -119,10 +125,8 @@ module Traktr
 
     def unseen(movies)
       movies = [ movies ] if movies.class != Array
-      data = {
-          username: @client.username, password: @client.password,
-          movies: movies.collect{ |s| { title: s.title, year: s.year, imdb_id: s.imdb_id, tmdb_id: s.tmdb_id }}
-      }
+      data = @auth.merge({ movies: movies })
+
       response = self.class.post('/' + File.join('unseen', @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       raise ResponseError.new(response) if response.code != 200
 

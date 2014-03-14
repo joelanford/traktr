@@ -26,6 +26,10 @@ describe Traktr::Movie do
       it '#related' do
         expect( @trakt.movie.related('the-dark-knight-2008').size ).to eql(10)
       end
+
+      it '#stats' do
+        expect( @trakt.movie.stats('the-dark-knight-2008').class ).to eql(Mash)
+      end
     end
 
     context 'without valid api_key' do
@@ -51,6 +55,10 @@ describe Traktr::Movie do
 
       it '#related' do
         expect { @trakt.movie.related('the-dark-knight-2008') }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#stats' do
+        expect { @trakt.movie.stats('the-dark-knight-2008').class }.to raise_error(Traktr::ResponseError)
       end
     end
   end
