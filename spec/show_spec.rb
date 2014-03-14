@@ -35,6 +35,10 @@ describe Traktr::Show do
         it '#related' do
           expect( @trakt.show.related('dexter').size ).to eql(10)
         end
+
+        it '#stats' do
+          expect( @trakt.show.stats('dexter').class ).to eql(Mash)
+        end
       end
 
       context 'with invalid query' do
@@ -65,6 +69,10 @@ describe Traktr::Show do
 
         it '#related' do
           expect { @trakt.show.related('blah') }.to raise_error(Traktr::ResponseError)
+        end
+
+        it '#stats' do
+          expect { @trakt.show.stats('blah') }.to raise_error(Traktr::ResponseError)
         end
       end
 
@@ -101,6 +109,10 @@ describe Traktr::Show do
 
       it '#related' do
         expect { @trakt.show.related('the-walking-dead') }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#stats' do
+        expect { @trakt.show.stats('the-walking-dead') }.to raise_error(Traktr::ResponseError)
       end
     end
   end
