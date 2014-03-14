@@ -5,10 +5,11 @@ module Traktr
 
     def initialize(client)
       @client = client
+      @auth = { username: @client.username, password: @client.password }
     end
 
     def settings
-      data = { username: @client.username, password: @client.password }
+      data = @auth
       response = self.class.post("/" + File.join("settings", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       raise ResponseError.new(response) if response.code != 200
 
@@ -16,7 +17,7 @@ module Traktr
     end
 
     def test
-      data = { username: @client.username, password: @client.password }
+      data = @auth
       response = self.class.post("/" + File.join("test", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       raise ResponseError.new(response) if response.code != 200
 
