@@ -5,24 +5,29 @@ module Traktr
 
     def initialize(client)
       @client = client
+      @auth = { :username => @client.username, :password => @client.password }
+    end
+
+    def calendar
+      @calendar ||= Traktr::User::Calendar.new(@client)
     end
 
     def lastactivity(user = @client.username)
-      response = self.class.get("/" + File.join("lastactivity.json", @client.api_key, user))
+      response = self.class.get("/" + File.join("lastactivity.json", @client.api_key, user), :basic_auth => @auth)
       raise ResponseError.new(response) if response.code != 200
 
       Mash.new(response.parsed_response)
     end
 
     def list(slug, user = @client.username)
-      response = self.class.get("/" + File.join("list.json", @client.api_key, user, slug))
+      response = self.class.get("/" + File.join("list.json", @client.api_key, user, slug), :basic_auth => @auth)
       raise ResponseError.new(response) if response.code != 200
 
       Mash.new(response.parsed_response)
     end
 
     def lists(user = @client.username)
-      response = self.class.get("/" + File.join("lists.json", @client.api_key, user))
+      response = self.class.get("/" + File.join("lists.json", @client.api_key, user), :basic_auth => @auth)
       raise ResponseError.new(response) if response.code != 200
 
       response.parsed_response.collect do |item|
@@ -31,14 +36,14 @@ module Traktr
     end
 
     def profile(user = @client.username)
-      response = self.class.get("/" + File.join("profile.json", @client.api_key, user))
+      response = self.class.get("/" + File.join("profile.json", @client.api_key, user), :basic_auth => @auth)
       raise ResponseError.new(response) if response.code != 200
 
       Mash.new(response.parsed_response)
     end
 
     def watching(user = @client.username)
-      response = self.class.get("/" + File.join("watching.json", @client.api_key, user))
+      response = self.class.get("/" + File.join("watching.json", @client.api_key, user), :basic_auth => @auth)
       raise ResponseError.new(response) if response.code != 200
 
       response.parsed_response.collect do |item|
@@ -47,9 +52,3 @@ module Traktr
     end
   end
 end
-
-#require 'traktr/user/library'
-#require 'traktr/user/network'
-#require 'traktr/user/progress'
-#require 'traktr/user/ratings'
-#require 'traktr/user/watchlist'

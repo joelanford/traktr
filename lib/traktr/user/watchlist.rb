@@ -1,6 +1,6 @@
 module Traktr
-  module User
-    module Watchlist
+  class User
+    class Watchlist
       include HTTParty
       base_uri File.join(Traktr::User.base_uri, 'watchlist')
 

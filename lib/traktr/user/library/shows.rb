@@ -1,7 +1,7 @@
 module Traktr
-  module User
-    module Library
-      module Shows
+  class User
+    class Library
+      class Shows
         include HTTParty
         base_uri File.join(Traktr::User::Library.base_uri, 'shows')
 

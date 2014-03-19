@@ -1,6 +1,6 @@
 module Traktr
-  module User
-    module Progress
+  class User
+    class Progress
       include HTTParty
       base_uri File.join(Traktr::User.base_uri, 'progress')
 

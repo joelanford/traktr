@@ -1,6 +1,6 @@
 module Traktr
-  module User
-    module Ratings
+  class User
+    class Ratings
       include HTTParty
       base_uri File.join(Traktr::User.base_uri, 'ratings')
 
