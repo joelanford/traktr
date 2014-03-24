@@ -12,6 +12,26 @@ module Traktr
       @calendar ||= Traktr::User::Calendar.new(@client)
     end
 
+    def library
+      @library ||= Traktr::User::Library.new(@client)
+    end
+
+    def network
+      @network ||= Traktr::User::Network.new(@client)
+    end
+
+    def progress
+      @progress ||= Traktr::User::Progress.new(@client)
+    end
+
+    def ratings
+      @ratings ||= Traktr::User::Ratings.new(@client)
+    end
+
+    def watchlist
+      @watchlist ||= Traktr::User::Watchlist.new(@client)
+    end
+
     def lastactivity(user = @client.username)
       response = self.class.get("/" + File.join("lastactivity.json", @client.api_key, user), :basic_auth => @auth)
       raise ResponseError.new(response) if response.code != 200

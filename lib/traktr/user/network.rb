@@ -4,6 +4,11 @@ module Traktr
       include HTTParty
       base_uri File.join(Traktr::User.base_uri, 'network')
 
+      def initialize(client)
+        @client = client
+        @auth = { :username => @client.username, :password => @client.password }
+      end
+      
       def followers(username = @client.username)
         response = self.class.get('/' + File.join('followers.json', @client.api_key, username))
         raise ResponseError.new(response) if response.code != 200

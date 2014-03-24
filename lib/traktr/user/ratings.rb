@@ -4,6 +4,11 @@ module Traktr
       include HTTParty
       base_uri File.join(Traktr::User.base_uri, 'ratings')
 
+      def initialize(client)
+        @client = client
+        @auth = { :username => @client.username, :password => @client.password }
+      end
+      
       def episodes(username = @client.username, rating = :all, extended = :min)
         response = self.class.get('/' + File.join('episodes.json', @client.api_key, username, rating.to_s, extended.to_s))
         raise ResponseError.new(response) if response.code != 200
