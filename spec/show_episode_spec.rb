@@ -23,6 +23,10 @@ describe Traktr::Show::Episode do
         expect( @trakt.show.episode.comments(@show, @season, @episode).size ).to be > 0
       end
 
+      it '#stats' do
+        expect( @trakt.show.episode.stats(@show, @season, @episode).keys.size ).to eql(8)
+      end
+
       it '#summary' do
         expect( @trakt.show.episode.summary(@show, @season, @episode).show.imdb_id ).to eql('tt1520211')
       end
@@ -39,6 +43,10 @@ describe Traktr::Show::Episode do
 
       it '#comments' do
         expect { @trakt.show.episode.comments(@show, @season, @episode) }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#stats' do
+        expect { @trakt.show.episode.stats(@show, @season, @episode) }.to raise_error(Traktr::ResponseError)
       end
 
       it '#summary' do

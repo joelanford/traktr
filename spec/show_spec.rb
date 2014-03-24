@@ -37,7 +37,7 @@ describe Traktr::Show do
         end
 
         it '#stats' do
-          expect( @trakt.show.stats('dexter').class ).to eql(Mash)
+          expect( @trakt.show.stats('dexter').size ).to eql(8)
         end
       end
 

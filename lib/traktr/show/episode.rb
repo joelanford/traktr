@@ -20,6 +20,13 @@ module Traktr
         end
       end
 
+      def stats(title, season, episode)
+        response = self.class.get("/" + File.join("stats.json", @client.api_key, title, season.to_s, episode.to_s))
+        raise ResponseError.new(response) if response.code != 200
+
+        Mash.new(response.parsed_response)     
+      end
+
       def summary(title, season, episode)
         response = self.class.get("/" + File.join("summary.json", @client.api_key, title, season.to_s, episode.to_s))
         raise ResponseError.new(response) if response.code != 200
