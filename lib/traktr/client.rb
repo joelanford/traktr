@@ -10,7 +10,7 @@ require 'traktr/lists'
 require 'traktr/lists/items'
 require 'traktr/movie'
 require 'traktr/movies'
-#require 'traktr/network'
+require 'traktr/network'
 #require 'traktr/rate'
 #require 'traktr/recommendations'
 require 'traktr/search'
@@ -63,6 +63,10 @@ module Traktr
 
     def lists
       @lists ||= Traktr::Lists.new(self)
+    end
+
+    def network
+      @network ||= Traktr::Network.new(self)
     end
 
     def movie

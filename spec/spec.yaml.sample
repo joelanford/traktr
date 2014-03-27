@@ -1,7 +1,14 @@
 #
-# WARNING: This account is used for automated unit testing.
+# WARNING: These accounts are used for automated unit testing.
 #          Do not use your normal Trakt user account!
 #
-api_key: "<TRAKT_API_KEY>"
-username: "<TRAKT_USERNAME>"
-password: "<TRAKT_PASSWORD>"
+#  The first account is used for all unit tests 
+#  The second account is needed to test the "network" endpoints
+#
+users:
+ - api_key:  "<TRAKT_API_KEY>"
+   username: "<TRAKT_USERNAME>"
+   password: "<TRAKT_PASSWORD>"
+ - api_key:  "<SECONDARY_API_KEY>"
+   username: "<SECONDARY_USERNAME>"
+   password: "<SECONDARY_PASSWORD>"
