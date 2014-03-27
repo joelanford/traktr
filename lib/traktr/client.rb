@@ -11,7 +11,7 @@ require 'traktr/lists/items'
 require 'traktr/movie'
 require 'traktr/movies'
 require 'traktr/network'
-#require 'traktr/rate'
+require 'traktr/rate'
 #require 'traktr/recommendations'
 require 'traktr/search'
 require 'traktr/server'
@@ -75,6 +75,10 @@ module Traktr
 
     def movies
       @movies ||= Traktr::Movies.new(self)
+    end
+
+    def rate
+      @rate ||= Traktr::Rate.new(self)
     end
 
     def search
