@@ -1,13 +1,6 @@
 module Traktr
   class User
-    class Library
-      include HTTParty
-      base_uri File.join(Traktr::User.base_uri, 'library')
-
-      def initialize(client)
-        @client = client
-      end
-
+    class Library < Endpoint
       def movies
       	@movies ||= Traktr::User::Library::Movies.new(@client)
       end

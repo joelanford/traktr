@@ -1,62 +1,29 @@
 module Traktr
   class Show
-    class Episode
-      include HTTParty
-      base_uri File.join(Traktr::Show.base_uri, "episode")
-      
-      def initialize(client)
-        @client = client
-      end
-
-      ##
-      ## show-episode GET methods
-      ##
+    class Episode < Endpoint
       def comments(title, season, episode)
-        response = self.class.get("/" + File.join("comments.json", @client.api_key, title, season.to_s, episode.to_s))
-        raise ResponseError.new(response) if response.code != 200
-
-        response.parsed_response.collect do |comment|
-          Mash.new(comment)
-        end
+        parse_response self.class.get("/" + File.join("comments.json", @client.api_key, title, season.to_s, episode.to_s))
       end
 
       def stats(title, season, episode)
-        response = self.class.get("/" + File.join("stats.json", @client.api_key, title, season.to_s, episode.to_s))
-        raise ResponseError.new(response) if response.code != 200
-
-        Mash.new(response.parsed_response)     
+        parse_response self.class.get("/" + File.join("stats.json", @client.api_key, title, season.to_s, episode.to_s))
       end
 
       def summary(title, season, episode)
-        response = self.class.get("/" + File.join("summary.json", @client.api_key, title, season.to_s, episode.to_s))
-        raise ResponseError.new(response) if response.code != 200
-
-        Mash.new(response.parsed_response)
+        parse_response self.class.get("/" + File.join("summary.json", @client.api_key, title, season.to_s, episode.to_s))
       end
 
       def watchingnow(title, season, episode)
-        response = self.class.get("/" + File.join("watchingnow.json", @client.api_key, title, season.to_s, episode.to_s))
-        raise ResponseError.new(response) if response.code != 200
-
-        response.parsed_response.collect do |user|
-          Mash.new(user)
-        end
+        parse_response self.class.get("/" + File.join("watchingnow.json", @client.api_key, title, season.to_s, episode.to_s))
       end
 
-
-      ##
-      ## show-episode POST methods
-      ##
       def library(show, episodes)
         data = {
             username: @client.username, password: @client.password,
             title: show.title, year: show.year, imdb_id: show.imdb_id, tvdb_id: show.tvdb_id,
             episodes: episodes.collect{ |e| { season: e.season, episode: e.episode } }
         }
-        response = self.class.post("/" + File.join("library", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
-        raise ResponseError.new(response) if response.code != 200
-
-        Mash.new(response.parsed_response)
+        parse_response self.class.post("/" + File.join("library", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       end
 
       def unlibrary(show, episodes)
@@ -65,10 +32,7 @@ module Traktr
             title: show.title, year: show.year, imdb_id: show.imdb_id, tvdb_id: show.tvdb_id,
             episodes: episodes.collect{ |e| { season: e.season, episode: e.episode } }
         }
-        response = self.class.post("/" + File.join("unlibrary", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
-        raise ResponseError.new(response) if response.code != 200
-
-        Mash.new(response.parsed_response)
+        parse_response self.class.post("/" + File.join("unlibrary", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       end
 
       def seen(show, episodes)
@@ -77,10 +41,7 @@ module Traktr
             title: show.title, year: show.year, imdb_id: show.imdb_id, tvdb_id: show.tvdb_id,
             episodes: episodes.collect{ |e| { season: e.season, episode: e.episode } }
         }
-        response = self.class.post("/" + File.join("seen", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
-        raise ResponseError.new(response) if response.code != 200
-
-        Mash.new(response.parsed_response)
+        parse_response self.class.post("/" + File.join("seen", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       end
 
       def unseen(show, episodes)
@@ -89,10 +50,7 @@ module Traktr
             title: show.title, year: show.year, imdb_id: show.imdb_id, tvdb_id: show.tvdb_id,
             episodes: episodes.collect{ |e| { season: e.season, episode: e.episode } }
         }
-        response = self.class.post("/" + File.join("unseen", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
-        raise ResponseError.new(response) if response.code != 200
-
-        Mash.new(response.parsed_response)
+        parse_response self.class.post("/" + File.join("unseen", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       end
 
       def watchlist(show, episodes)
@@ -101,10 +59,7 @@ module Traktr
             title: show.title, year: show.year, imdb_id: show.imdb_id, tvdb_id: show.tvdb_id,
             episodes: episodes.collect{ |e| { season: e.season, episode: e.episode } }
         }
-        response = self.class.post("/" + File.join("watchlist", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
-        raise ResponseError.new(response) if response.code != 200
-
-        Mash.new(response.parsed_response)
+        parse_response self.class.post("/" + File.join("watchlist", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       end
 
       def unwatchlist(show, episodes)
@@ -113,10 +68,7 @@ module Traktr
             title: show.title, year: show.year, imdb_id: show.imdb_id, tvdb_id: show.tvdb_id,
             episodes: episodes.collect{ |e| { season: e.season, episode: e.episode } }
         }
-        response = self.class.post("/" + File.join("unwatchlist", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
-        raise ResponseError.new(response) if response.code != 200
-
-        Mash.new(response.parsed_response)
+        parse_response self.class.post("/" + File.join("unwatchlist", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       end
     end
   end

@@ -1,5 +1,7 @@
 require 'digest/sha1'
 
+require 'traktr/endpoint'
+
 require 'traktr/account'
 require 'traktr/activity'
 require 'traktr/activity/user'

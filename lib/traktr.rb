@@ -7,5 +7,4 @@ module Traktr
   base_uri "https://api.trakt.tv"
 end
 
-
 require 'traktr/client'

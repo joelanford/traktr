@@ -45,7 +45,7 @@ describe Traktr::User do
 
       it '#watching' do
         watching = @trakt.user.watching(USERNAME)
-        expect( watching.class ).to eql(Mash)
+        expect( watching.size ).to eql(0)
       end
     end
 
@@ -81,7 +81,7 @@ describe Traktr::User do
 
       it '#watching' do
         watching = @trakt.user.watching
-        expect( watching.class ).to eql(Mash)
+        expect( watching.size ).to eql(0)
       end
     end
 

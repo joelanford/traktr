@@ -1,47 +1,19 @@
 module Traktr
-  class Recommendations
-    include HTTParty
-    base_uri File.join(Traktr.base_uri, 'recommendations')
-
-    def initialize(client)
-      @client = client
-      @auth = { username: @client.username, password: @client.password }
-    end
-
+  class Recommendations < Endpoint
     def movies( data = {} )
-      data.merge!(@auth)
-      response = self.class.post('/' + File.join('movies', @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
-      raise ResponseError.new(response) if response.code != 200
-
-      response.parsed_response.collect do |show|
-        Mash.new(show)
-      end
+      parse_response self.class.post('/' + File.join('movies', @client.api_key), body: data.merge(@auth).to_json, headers: { 'Content-Type' => 'application/json'})
     end
 
     def movies_dismiss( data )
-      data.merge!(@auth)
-      response = self.class.post('/' + File.join('movies/dismiss', @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
-      raise ResponseError.new(response) if response.code != 200
-
-      Mash.new(response.parsed_response)
+      parse_response self.class.post('/' + File.join('movies/dismiss', @client.api_key), body: data.merge(@auth).to_json, headers: { 'Content-Type' => 'application/json'})
     end
 
     def shows( data = {} )
-      data.merge!(@auth)
-      response = self.class.post('/' + File.join('shows', @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
-      raise ResponseError.new(response) if response.code != 200
-
-      response.parsed_response.collect do |show|
-        Mash.new(show)
-      end
+      parse_response self.class.post('/' + File.join('shows', @client.api_key), body: data.merge(@auth).to_json, headers: { 'Content-Type' => 'application/json'})
     end
 
     def shows_dismiss( data )
-      data.merge!(@auth)
-      response = self.class.post('/' + File.join('shows/dismiss', @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
-      raise ResponseError.new(response) if response.code != 200
-
-      Mash.new(response.parsed_response)
+      parse_response self.class.post('/' + File.join('shows/dismiss', @client.api_key), body: data.merge(@auth).to_json, headers: { 'Content-Type' => 'application/json'})
     end
   end
 end

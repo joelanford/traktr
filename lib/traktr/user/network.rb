@@ -1,39 +1,16 @@
 module Traktr
   class User
-    class Network
-      include HTTParty
-      base_uri File.join(Traktr::User.base_uri, 'network')
-
-      def initialize(client)
-        @client = client
-        @auth = { :username => @client.username, :password => @client.password }
-      end
-      
+    class Network < Endpoint
       def followers(username = @client.username)
-        response = self.class.get('/' + File.join('followers.json', @client.api_key, username))
-        raise ResponseError.new(response) if response.code != 200
-
-        response.parsed_response.collect do |item|
-          Mash.new(item)
-        end
+        parse_response self.class.get('/' + File.join('followers.json', @client.api_key, username))
       end
 
       def following(username = @client.username)
-        response = self.class.get('/' + File.join('following.json', @client.api_key, username))
-        raise ResponseError.new(response) if response.code != 200
-
-        response.parsed_response.collect do |item|
-          Mash.new(item)
-        end
+        parse_response self.class.get('/' + File.join('following.json', @client.api_key, username))
       end
 
       def friends(username = @client.username)
-        response = self.class.get('/' + File.join('friends.json', @client.api_key, username))
-        raise ResponseError.new(response) if response.code != 200
-
-        response.parsed_response.collect do |item|
-          Mash.new(item)
-        end
+        parse_response self.class.get('/' + File.join('friends.json', @client.api_key, username))
       end
     end
   end

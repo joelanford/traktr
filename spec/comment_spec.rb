@@ -5,10 +5,10 @@ describe Traktr::Comment do
     before :all do
       @episode_data = { :title => "Dexter", :year => "2006", :season => "1", :episode => "1", :comment => "Test comment - #{Time.now.to_s}" }
       @movie_data   = { :title => "The Dark Knight Rises", :year => "2012", :comment => "Test comment - #{Time.now.to_s}" }
-      @show_data    = {:title => "Dexter", :year => "2006", :comment => "Test comment - #{Time.now.to_s}" }
+      @show_data    = { :title => "Dexter", :year => "2006", :comment => "Test comment - #{Time.now.to_s}" }
     end
 
-    context 'with valid api_key and auth credentials' do
+    context 'with valid api_key and auth credentials', :misbehaving => true do
       before :all do
         @trakt = Traktr::Client.new(API_KEY, USERNAME, PASSWORD)
       end
