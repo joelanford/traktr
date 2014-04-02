@@ -64,5 +64,55 @@ module Traktr
       data = @auth.merge({ :movies => movies })
       parse_response self.class.post('/' + File.join('unseen', @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
     end
+
+    def watching(movie, progress, media_center_version, media_center_date)
+      data = {
+        username: @client.username, password: @client.password, title: movie.title, year: movie.year, imdb_id: movie.imdb_id, duration: movie.duration, progress: progress, plugin_version: Traktr::VERSION, media_center_version: media_center_version, media_center_date: media_center_date,
+      }
+      response = self.class.post("/" + File.join("watching", @client.api_key), body: data.to_json, headers: {'Content-Type' => 'application/json'})
+      raise ResponseError.new(response) if response.code != 200
+
+      Mash.new(response.parsed_response)
+    end
+    
+    def scrobble(movie, progress, media_center_version, media_center_date)
+      data = {
+        username: @client.username, password: @client.password, title: movie.title, year: movie.year, imdb_id: movie.imdb_id, duration: movie.duration, progress: progress, plugin_version: Traktr::VERSION, media_center_version: media_center_version, media_center_date: media_center_date,
+      }
+      response = self.class.post("/" + File.join("scrobble", @client.api_key), body: data.to_json, headers: {'Content-Type' => 'application/json'})
+      raise ResponseError.new(response) if response.code != 200
+
+      Mash.new(response.parsed_response)
+    end
+
+    def checkin(movie, app_version, app_date)
+      data = {
+        username: @client.username, password: @client.password, title: movie.title, year: movie.year, app_version: app_version, app_date: app_date,
+      }
+      response = self.class.post("/" + File.join("checkin", @client.api_key), body: data.to_json, headers: {'Content-Type' => 'application/json'})
+      raise ResponseError.new(response) if response.code != 200
+
+      Mash.new(response.parsed_response)
+    end
+
+    def cancelwatching
+      data = {
+        username: @client.username, password: @client.password,
+      }
+      response = self.class.post("/" + File.join("cancelwatching", @client.api_key), body: data.to_json, headers: {'Content-Type' => 'application/json'})
+      raise ResponseError.new(response) if response.code != 200
+
+      Mash.new(response.parsed_response)
+    end
+
+    def cancelcheckin
+      data = {
+        username: @client.username, password: @client.password,
+      }
+      response = self.class.post("/" + File.join("cancelcheckin", @client.api_key), body: data.to_json, headers: {'Content-Type' => 'application/json'})
+      raise ResponseError.new(response) if response.code != 200
+
+      Mash.new(response.parsed_response)
+    end
   end
 end

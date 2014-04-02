@@ -70,6 +70,8 @@ module Traktr
         }
         parse_response self.class.post("/" + File.join("unwatchlist", @client.api_key), body: data.to_json, headers: { 'Content-Type' => 'application/json'})
       end
+      
+      
     end
   end
 end

@@ -147,6 +147,26 @@ describe Traktr::Show do
       it '#seen' do
         expect( @trakt.show.seen(@show).status ).to eql('success')
       end
+
+      it '#watching' do
+        expect( @trakt.show.watching(@show, 1, 1, 85, "0.1", 'Dec 22 2013').status ).to eql('success')
+      end
+
+      it '#scrobble' do
+        expect( @trakt.show.scrobble(@show, 1, 1, 85, "0.1", 'Dec 22 2013').status ).to eql('success')
+      end
+
+      it '#checkin' do
+        expect( @trakt.show.checkin(@show, 1, 1, "0.1", "Dec 22 2013").status ).to eql('success')
+      end
+
+      it '#cancelwatching' do
+        expect ( @trakt.show.cancelwatching ).to eql('success')
+      end
+      
+      it '#cancelcheckin' do
+        expect ( @trakt.show.cancelcheckin ).to eql('success')
+      end
     end
 
     context 'without valid api_key' do
@@ -173,6 +193,26 @@ describe Traktr::Show do
       it '#seen' do
         expect { @trakt.show.seen(@show) }.to raise_error(Traktr::ResponseError)
       end
+
+      it '#watching' do
+        expect { @trakt.show.watching(@show, 1, 1, 85, "0.1", 'Dec 22 2013') }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#scrobble' do
+        expect { @trakt.show.scrobble(@show, 1, 1, 85, "0.1", 'Dec 22 2013') }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#checkin' do
+        expect { @trakt.show.checkin(@show, 1, 1, "0.1", "Dec 22 2013") }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#cancelwatching' do
+        expect { @trakt.show.cancelwatching }.to raise_error(Traktr::ResponseError)
+      end
+      
+      it '#cancelcheckin' do
+        expect { @trakt.show.cancelcheckin }.to raise_error(Traktr::ResponseError)
+      end
     end
 
     context 'without valid auth credentials' do
@@ -198,6 +238,26 @@ describe Traktr::Show do
 
       it '#seen' do
         expect { @trakt.show.seen(@show) }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#watching' do
+        expect { @trakt.show.watching(@show, 1, 1, 85, "0.1", "Dec 22 2013") }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#scrobble' do
+        expect { @trakt.show.scrobble(@show, 1, 1, 85, "0.1", "Dec 22 2013") }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#checkin' do
+        expect { @trakt.show.checkin(@show, 1, 1, "0.1", "Dec 22 2013") }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#cancelwatching' do
+        expect { @trakt.show.cancelwatching }.to raise_error(Traktr::ResponseError)
+      end
+
+      it '#cancelcheckin' do
+        expect { @trakt.show.cancelcheckin }.to raise_error(Traktr::ResponseError)
       end
     end
   end
