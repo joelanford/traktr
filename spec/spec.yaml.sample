@@ -4,6 +4,7 @@
 #
 #  The first account is used for all unit tests 
 #  The second account is needed to test the "network" endpoints
+#  The new_user account is needed to test the "account/create" endpoint
 #
 users:
  - api_key:  "<TRAKT_API_KEY>"
@@ -12,3 +13,7 @@ users:
  - api_key:  "<SECONDARY_API_KEY>"
    username: "<SECONDARY_USERNAME>"
    password: "<SECONDARY_PASSWORD>"
+new_user:
+   username: "<NEW_USER_NAME>"
+   password: "<NEW_USER_PASSWORD>"
+   email: "<NEW_USER_EMAIL>"

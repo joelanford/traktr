@@ -8,7 +8,7 @@ require 'traktr'
 
 if File.exist?(File.join(File.dirname(__FILE__), "spec.yaml"))
   config   = YAML.load_file(File.join(File.dirname(__FILE__), "spec.yaml"))
-  if config["users"].class == Array && config["users"].size == 2
+  if config["users"].class == Array && config["users"].size == 2 && config["new_user"].class == Hash
     API_KEY  = config["users"][0]["api_key"]
     USERNAME = config["users"][0]["username"]
     PASSWORD = config["users"][0]["password"]
@@ -16,6 +16,10 @@ if File.exist?(File.join(File.dirname(__FILE__), "spec.yaml"))
     API_KEY_2  = config["users"][1]["api_key"]
     USERNAME_2 = config["users"][1]["username"]
     PASSWORD_2 = config["users"][1]["password"]
+
+    CREATE_USER_NAME  = config["new_user"]["username"]
+    CREATE_USER_PASS  = config["new_user"]["password"]
+    CREATE_USER_EMAIL = config["new_user"]["email"]
   else
     $stderr.puts "ERROR: Your spec file must match the format shown in 'spec.yaml.sample' in the spec directory!"
     exit 1
