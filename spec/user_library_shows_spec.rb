@@ -8,15 +8,15 @@ describe Traktr::User::Library::Shows do
       end
 
       it '#all' do
-        expect( @trakt.user.library.shows.all("traktr").size ).to be >= 0
+        expect(@trakt.user.library.shows.all('traktr').size).to be >= 0
       end
 
       it '#collection' do
-        expect( @trakt.user.library.shows.collection("traktr").size ).to be >= 0
+        expect(@trakt.user.library.shows.collection('traktr').size).to be >= 0
       end
 
       it '#watched' do
-        expect( @trakt.user.library.shows.watched("traktr").size ).to be >= 0
+        expect(@trakt.user.library.shows.watched('traktr').size).to be >= 0
       end
     end
 
@@ -26,15 +26,15 @@ describe Traktr::User::Library::Shows do
       end
 
       it '#all' do
-        expect( @trakt.user.library.shows.all.size ).to be >= 0
+        expect(@trakt.user.library.shows.all.size).to be >= 0
       end
 
       it '#collection' do
-        expect( @trakt.user.library.shows.collection.size ).to be >= 0
+        expect(@trakt.user.library.shows.collection.size).to be >= 0
       end
 
       it '#watched' do
-        expect( @trakt.user.library.shows.watched.size ).to be >= 0
+        expect(@trakt.user.library.shows.watched.size).to be >= 0
       end
     end
 
@@ -44,15 +44,15 @@ describe Traktr::User::Library::Shows do
       end
 
       it '#all' do
-        expect{ @trakt.user.library.shows.all("traktr").size }.to raise_error(Traktr::ResponseError)
+        expect { @trakt.user.library.shows.all('traktr').size }.to raise_error(Traktr::ResponseError)
       end
 
       it '#collection' do
-        expect{ @trakt.user.library.shows.collection("traktr").size }.to raise_error(Traktr::ResponseError)
+        expect { @trakt.user.library.shows.collection('traktr').size }.to raise_error(Traktr::ResponseError)
       end
 
       it '#watched' do
-        expect{ @trakt.user.library.shows.watched("traktr").size }.to raise_error(Traktr::ResponseError)
+        expect { @trakt.user.library.shows.watched('traktr').size }.to raise_error(Traktr::ResponseError)
       end
     end
   end

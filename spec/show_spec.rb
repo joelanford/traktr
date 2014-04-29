@@ -9,35 +9,35 @@ describe Traktr::Show do
 
       context 'with valid query' do
         it '#comments' do
-          expect( @trakt.show.comments('dexter').size ).to be > 0
+          expect(@trakt.show.comments('dexter').size).to be > 0
         end
 
         it '#season' do
-          expect( @trakt.show.season('dexter', 1).size ).to eql(12)
+          expect(@trakt.show.season('dexter', 1).size).to eql(12)
         end
 
         it '#seasons' do
-          expect( @trakt.show.seasons('dexter').size ).to eql(9)
+          expect(@trakt.show.seasons('dexter').size).to eql(9)
         end
 
         it '#summary' do
-          expect( @trakt.show.summary('dexter').imdb_id ).to eql('tt0773262')
+          expect(@trakt.show.summary('dexter').imdb_id).to eql('tt0773262')
         end
 
         it '#summaries' do
-          expect( @trakt.show.summaries(['dexter', 'the-walking-dead']).size ).to eql(2)
+          expect(@trakt.show.summaries(%w(dexter the-walking-dead)).size).to eql(2)
         end
 
         it '#watchingnow' do
-          expect( @trakt.show.watchingnow('dexter').size ).to be >= 0
+          expect(@trakt.show.watchingnow('dexter').size).to be >= 0
         end
 
         it '#related' do
-          expect( @trakt.show.related('dexter').size ).to eql(10)
+          expect(@trakt.show.related('dexter').size).to eql(10)
         end
 
         it '#stats' do
-          expect( @trakt.show.stats('dexter').size ).to eql(8)
+          expect(@trakt.show.stats('dexter').size).to eql(8)
         end
       end
 
@@ -60,7 +60,7 @@ describe Traktr::Show do
         end
 
         it '#summaries' do
-          expect { @trakt.show.summaries(['blah', 'blah-blah']) }.to raise_error(Traktr::ResponseError)
+          expect { @trakt.show.summaries(%w(blah blah-blah)) }.to raise_error(Traktr::ResponseError)
         end
 
         it '#watchingnow' do
@@ -100,7 +100,7 @@ describe Traktr::Show do
       end
 
       it '#summaries' do
-        expect { @trakt.show.summaries(['the-walking-dead', 'dexter']) }.to raise_error(Traktr::ResponseError)
+        expect { @trakt.show.summaries(%w(the-walking-dead dexter)) }.to raise_error(Traktr::ResponseError)
       end
 
       it '#watchingnow' do
@@ -129,23 +129,23 @@ describe Traktr::Show do
       end
 
       it '#library' do
-        expect( @trakt.show.library(@show).status ).to eql('success')
+        expect(@trakt.show.library(@show).status).to eql('success')
       end
 
       it '#unlibrary' do
-        expect( @trakt.show.unlibrary(@show).status ).to eql('success')
+        expect(@trakt.show.unlibrary(@show).status).to eql('success')
       end
 
       it '#watchlist' do
-        expect( @trakt.show.watchlist(@show).status ).to eql('success')
+        expect(@trakt.show.watchlist(@show).status).to eql('success')
       end
 
       it '#unwatchlist' do
-        expect( @trakt.show.unwatchlist(@show).status ).to eql('success')
+        expect(@trakt.show.unwatchlist(@show).status).to eql('success')
       end
 
       it '#seen' do
-        expect( @trakt.show.seen(@show).status ).to eql('success')
+        expect(@trakt.show.seen(@show).status).to eql('success')
       end
     end
 

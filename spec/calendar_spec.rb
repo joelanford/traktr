@@ -8,11 +8,11 @@ describe Traktr::Calendar do
       end
 
       it '#premieres' do
-        expect( @trakt.calendar.premieres.class ).to eql(Array)
+        expect(@trakt.calendar.premieres.class).to eql(Array)
       end
 
       it '#shows' do
-        expect( @trakt.calendar.shows.class ).to eql(Array)
+        expect(@trakt.calendar.shows.class).to eql(Array)
       end
     end
 
@@ -23,19 +23,19 @@ describe Traktr::Calendar do
 
       it '#premieres' do
         premieres = @trakt.calendar.premieres
-        expect( premieres.class ).to eql(Array)
+        expect(premieres.class).to eql(Array)
         premieres.each do |day|
           day.episodes.each do |episode|
-            expect( episode.show.rating ).not_to eql(nil)
-            expect( episode.show.rating_advanced ).not_to eql(nil)
-            expect( episode.show.in_watchlist ).not_to eql(nil)
+            expect(episode.show.rating).not_to eql(nil)
+            expect(episode.show.rating_advanced).not_to eql(nil)
+            expect(episode.show.in_watchlist).not_to eql(nil)
 
-            expect( episode.episode.watched ).not_to eql(nil)
-            expect( episode.episode.plays ).not_to eql(nil)
-            expect( episode.episode.in_watchlist ).not_to eql(nil)
-            expect( episode.episode.in_collection ).not_to eql(nil)
-            expect( episode.episode.rating ).not_to eql(nil)
-            expect( episode.episode.rating_advanced ).not_to eql(nil)
+            expect(episode.episode.watched).not_to eql(nil)
+            expect(episode.episode.plays).not_to eql(nil)
+            expect(episode.episode.in_watchlist).not_to eql(nil)
+            expect(episode.episode.in_collection).not_to eql(nil)
+            expect(episode.episode.rating).not_to eql(nil)
+            expect(episode.episode.rating_advanced).not_to eql(nil)
           end
         end
 
@@ -43,19 +43,19 @@ describe Traktr::Calendar do
 
       it '#shows' do
         shows = @trakt.calendar.shows
-        expect( shows.class ).to eql(Array)
+        expect(shows.class).to eql(Array)
         shows.each do |day|
           day.episodes.each do |episode|
-            expect( episode.show.rating ).not_to eql(nil)
-            expect( episode.show.rating_advanced ).not_to eql(nil)
-            expect( episode.show.in_watchlist ).not_to eql(nil)
+            expect(episode.show.rating).not_to eql(nil)
+            expect(episode.show.rating_advanced).not_to eql(nil)
+            expect(episode.show.in_watchlist).not_to eql(nil)
 
-            expect( episode.episode.watched ).not_to eql(nil)
-            expect( episode.episode.plays ).not_to eql(nil)
-            expect( episode.episode.in_watchlist ).not_to eql(nil)
-            expect( episode.episode.in_collection ).not_to eql(nil)
-            expect( episode.episode.rating ).not_to eql(nil)
-            expect( episode.episode.rating_advanced ).not_to eql(nil)
+            expect(episode.episode.watched).not_to eql(nil)
+            expect(episode.episode.plays).not_to eql(nil)
+            expect(episode.episode.in_watchlist).not_to eql(nil)
+            expect(episode.episode.in_collection).not_to eql(nil)
+            expect(episode.episode.rating).not_to eql(nil)
+            expect(episode.episode.rating_advanced).not_to eql(nil)
           end
         end
       end

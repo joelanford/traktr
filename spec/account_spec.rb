@@ -8,11 +8,11 @@ describe Traktr::Account do
       end
 
       it '#settings' do
-        expect( @trakt.account.settings.status ).to eql('success')
+        expect(@trakt.account.settings.status).to eql('success')
       end
 
       it '#test' do
-        expect( @trakt.account.test.status ).to eql('success')
+        expect(@trakt.account.test.status).to eql('success')
       end
     end
 

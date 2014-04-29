@@ -8,23 +8,23 @@ describe Traktr::Search do
       end
 
       it '#episodes' do
-        expect( @trakt.search.episodes('warfare').size ).to be > 0
+        expect(@trakt.search.episodes('warfare').size).to be > 0
       end
 
       it '#movies' do
-        expect( @trakt.search.movies('Batman').size ).to be > 0
+        expect(@trakt.search.movies('Batman').size).to be > 0
       end
 
       it '#people' do
-        expect( @trakt.search.people('christian bale').size ).to be > 0
+        expect(@trakt.search.people('christian bale').size).to be > 0
       end
 
       it '#shows' do
-        expect( @trakt.search.shows('big bang theory').size ).to be > 0
+        expect(@trakt.search.shows('big bang theory').size).to be > 0
       end
 
       it '#users' do
-        expect( @trakt.search.users('justin').size ).to be > 0
+        expect(@trakt.search.users('justin').size).to be > 0
       end
     end
 

@@ -1,7 +1,7 @@
 module Traktr
   class Shows < Endpoint
     def trending
-      parse_response self.class.get('/' + File.join('trending.json', @client.api_key), :basic_auth => @auth)
+      parse_response self.class.get('/' + File.join('trending.json', @client.api_key), basic_auth: @auth)
     end
 
     def updated(timestamp)

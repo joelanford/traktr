@@ -8,11 +8,11 @@ describe Traktr::Genres do
       end
 
       it '#movies' do
-        expect( @trakt.genres.movies ).to be
+        expect(@trakt.genres.movies).to be
       end
 
       it '#shows' do
-        expect( @trakt.genres.shows ).to be
+        expect(@trakt.genres.shows).to be
       end
     end
 

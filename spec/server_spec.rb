@@ -8,7 +8,7 @@ describe Traktr::Server do
       end
 
       it '#time' do
-        expect( @trakt.server.time ).to be
+        expect(@trakt.server.time).to be
       end
     end
 

@@ -8,11 +8,11 @@ describe Traktr::User::Progress do
       end
 
       it '#collected' do
-        expect( @trakt.user.progress.collected("traktr").size ).to be >= 0
+        expect(@trakt.user.progress.collected('traktr').size).to be >= 0
       end
 
       it '#watched' do
-        expect( @trakt.user.progress.watched("traktr").size ).to be >= 0
+        expect(@trakt.user.progress.watched('traktr').size).to be >= 0
       end
     end
 
@@ -22,11 +22,11 @@ describe Traktr::User::Progress do
       end
 
       it '#collected' do
-        expect( @trakt.user.progress.collected.size ).to be >= 0
+        expect(@trakt.user.progress.collected.size).to be >= 0
       end
 
       it '#watched' do
-        expect( @trakt.user.progress.watched.size ).to be >= 0
+        expect(@trakt.user.progress.watched.size).to be >= 0
       end
     end
 
@@ -36,11 +36,11 @@ describe Traktr::User::Progress do
       end
 
       it '#collected' do
-        expect{ @trakt.user.progress.collected("traktr").size }.to raise_error(Traktr::ResponseError)
+        expect { @trakt.user.progress.collected('traktr').size }.to raise_error(Traktr::ResponseError)
       end
 
       it '#watched' do
-        expect{ @trakt.user.progress.watched("traktr").size }.to raise_error(Traktr::ResponseError)
+        expect { @trakt.user.progress.watched('traktr').size }.to raise_error(Traktr::ResponseError)
       end
     end
   end

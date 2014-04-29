@@ -8,11 +8,11 @@ describe Traktr::Movies do
       end
 
       it '#trending' do
-        expect( @trakt.movies.trending.size ).to be > 0
+        expect(@trakt.movies.trending.size).to be > 0
       end
 
       it '#updated' do
-        expect( @trakt.movies.updated(Time.now - 3600 * 24).size ).to be > 0
+        expect(@trakt.movies.updated(Time.now - 3600 * 24).size).to be > 0
       end
     end
 

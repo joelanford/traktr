@@ -8,11 +8,11 @@ describe Traktr::Shows do
       end
 
       it '#trending' do
-        expect( @trakt.shows.trending.size ).to be > 0
+        expect(@trakt.shows.trending.size).to be > 0
       end
 
       it '#updated' do
-        expect( @trakt.shows.updated(Time.now - 3600 * 24).size ).to be > 0
+        expect(@trakt.shows.updated(Time.now - 3600 * 24).size).to be > 0
       end
     end
 

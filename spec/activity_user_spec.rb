@@ -9,19 +9,19 @@ describe Traktr::Activity::User do
 
       context 'with valid query' do
         it '#episodes' do
-          expect( @trakt.activity.user.episodes('traktr', 'dexter', 1, 1).activity.class ).to eql(Array)
+          expect(@trakt.activity.user.episodes('traktr', 'dexter', 1, 1).activity.class).to eql(Array)
         end
 
         it '#movies' do
-          expect( @trakt.activity.user.movies('traktr', 'the-dark-knight-2008').activity.class ).to eql(Array)
+          expect(@trakt.activity.user.movies('traktr', 'the-dark-knight-2008').activity.class).to eql(Array)
         end
 
         it '#seasons' do
-          expect( @trakt.activity.user.seasons('traktr', 'dexter', 1).activity.class ).to eql(Array)
+          expect(@trakt.activity.user.seasons('traktr', 'dexter', 1).activity.class).to eql(Array)
         end
 
         it '#shows' do
-          expect( @trakt.activity.user.shows('traktr', 'dexter').activity.class ).to eql(Array)
+          expect(@trakt.activity.user.shows('traktr', 'dexter').activity.class).to eql(Array)
         end
       end
 

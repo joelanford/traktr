@@ -8,15 +8,15 @@ describe Traktr::User::Ratings do
       end
 
       it '#episodes' do
-        expect( @trakt.user.ratings.episodes("traktr").size ).to be >= 0
+        expect(@trakt.user.ratings.episodes('traktr').size).to be >= 0
       end
 
       it '#movies' do
-        expect( @trakt.user.ratings.movies("traktr").size ).to be >= 0
+        expect(@trakt.user.ratings.movies('traktr').size).to be >= 0
       end
 
       it '#shows' do
-        expect( @trakt.user.ratings.shows("traktr").size ).to be >= 0
+        expect(@trakt.user.ratings.shows('traktr').size).to be >= 0
       end
     end
 
@@ -26,15 +26,15 @@ describe Traktr::User::Ratings do
       end
 
       it '#episodes' do
-        expect( @trakt.user.ratings.episodes.size ).to be >= 0
+        expect(@trakt.user.ratings.episodes.size).to be >= 0
       end
 
       it '#movies' do
-        expect( @trakt.user.ratings.movies.size ).to be >= 0
+        expect(@trakt.user.ratings.movies.size).to be >= 0
       end
 
       it '#shows' do
-        expect( @trakt.user.ratings.shows.size ).to be >= 0
+        expect(@trakt.user.ratings.shows.size).to be >= 0
       end
     end
 
@@ -44,15 +44,15 @@ describe Traktr::User::Ratings do
       end
 
       it '#episodes' do
-        expect{ @trakt.user.ratings.episodes("traktr").size }.to raise_error(Traktr::ResponseError)
+        expect { @trakt.user.ratings.episodes('traktr').size }.to raise_error(Traktr::ResponseError)
       end
 
       it '#movies' do
-        expect{ @trakt.user.ratings.movies("traktr").size }.to raise_error(Traktr::ResponseError)
+        expect { @trakt.user.ratings.movies('traktr').size }.to raise_error(Traktr::ResponseError)
       end
 
       it '#shows' do
-        expect{ @trakt.user.ratings.shows("traktr").size }.to raise_error(Traktr::ResponseError)
+        expect { @trakt.user.ratings.shows('traktr').size }.to raise_error(Traktr::ResponseError)
       end
     end
   end

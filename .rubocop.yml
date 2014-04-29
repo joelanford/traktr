@@ -1,0 +1,16 @@
+inherit_from: rubocop-todo.yml
+
+# Offense count: 4
+# Cop supports --auto-correct.
+NumericLiterals:
+  MinDigits: 7
+
+# Offense count: 3
+# Configuration parameters: CountKeywordArgs.
+ParameterLists:
+  Max: 7
+
+# Offense count: 2
+# Configuration parameters: SupportedStyles.
+RaiseArgs:
+  EnforcedStyle: compact

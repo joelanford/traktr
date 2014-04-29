@@ -8,15 +8,15 @@ describe Traktr::User::Network do
       end
 
       it '#followers' do
-        expect( @trakt.user.network.followers("traktr").size ).to be >= 0
+        expect(@trakt.user.network.followers('traktr').size).to be >= 0
       end
 
       it '#following' do
-        expect( @trakt.user.network.following("traktr").size ).to be >= 0
+        expect(@trakt.user.network.following('traktr').size).to be >= 0
       end
 
       it '#friends' do
-        expect( @trakt.user.network.friends("traktr").size ).to be >= 0
+        expect(@trakt.user.network.friends('traktr').size).to be >= 0
       end
     end
 
@@ -26,15 +26,15 @@ describe Traktr::User::Network do
       end
 
       it '#followers' do
-        expect( @trakt.user.network.followers.size ).to be >= 0
+        expect(@trakt.user.network.followers.size).to be >= 0
       end
 
       it '#following' do
-        expect( @trakt.user.network.following.size ).to be >= 0
+        expect(@trakt.user.network.following.size).to be >= 0
       end
 
       it '#friends' do
-        expect( @trakt.user.network.friends.size ).to be >= 0
+        expect(@trakt.user.network.friends.size).to be >= 0
       end
     end
 
@@ -44,15 +44,15 @@ describe Traktr::User::Network do
       end
 
       it '#followers' do
-        expect{ @trakt.user.network.followers("traktr").size }.to raise_error(Traktr::ResponseError)
+        expect { @trakt.user.network.followers('traktr').size }.to raise_error(Traktr::ResponseError)
       end
 
       it '#following' do
-        expect{ @trakt.user.network.following("traktr").size }.to raise_error(Traktr::ResponseError)
+        expect { @trakt.user.network.following('traktr').size }.to raise_error(Traktr::ResponseError)
       end
 
       it '#friends' do
-        expect{ @trakt.user.network.friends("traktr").size }.to raise_error(Traktr::ResponseError)
+        expect { @trakt.user.network.friends('traktr').size }.to raise_error(Traktr::ResponseError)
       end
     end
   end

@@ -8,27 +8,27 @@ describe Traktr::Movie do
       end
 
       it '#comments' do
-        expect( @trakt.movie.comments('the-dark-knight-2008').size ).to be > 0
+        expect(@trakt.movie.comments('the-dark-knight-2008').size).to be > 0
       end
 
       it '#summary' do
-        expect( @trakt.movie.summary('the-dark-knight-2008').imdb_id ).to eql('tt0468569')
+        expect(@trakt.movie.summary('the-dark-knight-2008').imdb_id).to eql('tt0468569')
       end
 
       it '#summaries' do
-        expect( @trakt.movie.summaries(['the-dark-knight-2008', 'the-social-network-2010']).size ).to eql(2)
+        expect(@trakt.movie.summaries(%w(the-dark-knight-2008 the-social-network-2010)).size).to eql(2)
       end
 
       it '#watchingnow' do
-        expect( @trakt.movie.watchingnow('the-dark-knight-2008').size ).to be >= 0
+        expect(@trakt.movie.watchingnow('the-dark-knight-2008').size).to be >= 0
       end
 
       it '#related' do
-        expect( @trakt.movie.related('the-dark-knight-2008').size ).to eql(10)
+        expect(@trakt.movie.related('the-dark-knight-2008').size).to eql(10)
       end
 
       it '#stats' do
-        expect( @trakt.movie.stats('the-dark-knight-2008').class ).to eql(Mash)
+        expect(@trakt.movie.stats('the-dark-knight-2008').class).to eql(Mash)
       end
     end
 
@@ -46,7 +46,7 @@ describe Traktr::Movie do
       end
 
       it '#summaries' do
-        expect { @trakt.movie.summaries(['the-dark-knight-2008', 'the-social-network-2010']) }.to raise_error(Traktr::ResponseError)
+        expect { @trakt.movie.summaries(%w(the-dark-knight-2008 the-social-network-2010)) }.to raise_error(Traktr::ResponseError)
       end
 
       it '#watchingnow' do
@@ -74,27 +74,27 @@ describe Traktr::Movie do
       end
 
       it '#library' do
-        expect( @trakt.movie.library(@movie).status ).to eql('success')
+        expect(@trakt.movie.library(@movie).status).to eql('success')
       end
 
       it '#unlibrary' do
-        expect( @trakt.movie.unlibrary(@movie).status ).to eql('success')
+        expect(@trakt.movie.unlibrary(@movie).status).to eql('success')
       end
 
       it '#watchlist' do
-        expect( @trakt.movie.watchlist(@movie).status ).to eql('success')
+        expect(@trakt.movie.watchlist(@movie).status).to eql('success')
       end
 
       it '#unwatchlist' do
-        expect( @trakt.movie.unwatchlist(@movie).status ).to eql('success')
+        expect(@trakt.movie.unwatchlist(@movie).status).to eql('success')
       end
 
       it '#seen' do
-        expect( @trakt.movie.seen(@movie).status ).to eql('success')
+        expect(@trakt.movie.seen(@movie).status).to eql('success')
       end
 
       it '#unseen' do
-        expect( @trakt.movie.unseen(@movie).status ).to eql('success')
+        expect(@trakt.movie.unseen(@movie).status).to eql('success')
       end
     end
 

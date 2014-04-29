@@ -20,19 +20,19 @@ describe Traktr::Show::Episode do
       end
 
       it '#comments' do
-        expect( @trakt.show.episode.comments(@show, @season, @episode).size ).to be > 0
+        expect(@trakt.show.episode.comments(@show, @season, @episode).size).to be > 0
       end
 
       it '#stats' do
-        expect( @trakt.show.episode.stats(@show, @season, @episode).keys.size ).to eql(8)
+        expect(@trakt.show.episode.stats(@show, @season, @episode).keys.size).to eql(8)
       end
 
       it '#summary' do
-        expect( @trakt.show.episode.summary(@show, @season, @episode).show.imdb_id ).to eql('tt1520211')
+        expect(@trakt.show.episode.summary(@show, @season, @episode).show.imdb_id).to eql('tt1520211')
       end
 
       it '#watchingnow' do
-        expect( @trakt.show.episode.watchingnow(@show, @season, @episode).size ).to be >= 0
+        expect(@trakt.show.episode.watchingnow(@show, @season, @episode).size).to be >= 0
       end
     end
 
@@ -72,27 +72,27 @@ describe Traktr::Show::Episode do
       end
 
       it '#library' do
-        expect( @trakt.show.episode.library(@show, @episodes).status ).to eql('success')
+        expect(@trakt.show.episode.library(@show, @episodes).status).to eql('success')
       end
 
       it '#unlibrary' do
-        expect( @trakt.show.episode.unlibrary(@show, @episodes).status ).to eql('success')
+        expect(@trakt.show.episode.unlibrary(@show, @episodes).status).to eql('success')
       end
 
       it '#watchlist' do
-        expect( @trakt.show.episode.watchlist(@show, @episodes).status ).to eql('success')
+        expect(@trakt.show.episode.watchlist(@show, @episodes).status).to eql('success')
       end
 
       it '#unwatchlist' do
-        expect( @trakt.show.episode.unwatchlist(@show, @episodes).status ).to eql('success')
+        expect(@trakt.show.episode.unwatchlist(@show, @episodes).status).to eql('success')
       end
 
       it '#seen' do
-        expect( @trakt.show.episode.seen(@show, @episodes).status ).to eql('success')
+        expect(@trakt.show.episode.seen(@show, @episodes).status).to eql('success')
       end
 
       it '#unseen' do
-        expect( @trakt.show.episode.unseen(@show, @episodes).status ).to eql('success')
+        expect(@trakt.show.episode.unseen(@show, @episodes).status).to eql('success')
       end
     end
 

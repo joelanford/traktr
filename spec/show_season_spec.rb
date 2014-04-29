@@ -14,11 +14,11 @@ describe Traktr::Show::Season do
       end
 
       it '#library' do
-        expect( @trakt.show.season.library(@show, @season).status ).to eql('success')
+        expect(@trakt.show.season.library(@show, @season).status).to eql('success')
       end
 
       it '#seen' do
-        expect( @trakt.show.season.seen(@show, @season).status ).to eql('success')
+        expect(@trakt.show.season.seen(@show, @season).status).to eql('success')
       end
     end
 

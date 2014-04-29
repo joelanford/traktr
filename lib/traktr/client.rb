@@ -32,15 +32,18 @@ require 'traktr/user/ratings'
 require 'traktr/user/watchlist'
 require 'traktr/version'
 
-
 module Traktr
   class Client
     attr_reader :api_key, :username, :password
 
     def initialize(api_key, username = nil, password = nil, sha1 = false)
-      @api_key = api_key || ""
-      @username = username || ""
-      @password = password ? (sha1 ? password : Digest::SHA1.hexdigest(password)) : ""
+      @api_key = api_key || ''
+      @username = username || ''
+      if password
+        @password = sha1 ? password : Digest::SHA1.hexdigest(password)
+      else
+        @password = ''
+      end
     end
 
     def account
