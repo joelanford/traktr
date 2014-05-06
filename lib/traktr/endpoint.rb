@@ -3,7 +3,10 @@ module Traktr
     include HTTParty
 
     def initialize(client)
-      self.class.base_uri File.join(Traktr.base_uri, self.class.to_s.split('::')[1..-1].join('/').downcase)
+      self.class.base_uri(
+        File.join(Traktr.base_uri,
+                  self.class.to_s.split('::')[1..-1].join('/').downcase)
+      )
       @client = client
       @auth = { username: @client.username, password: @client.password }
     end
@@ -12,9 +15,10 @@ module Traktr
 
     def parse_response(response)
       #
-      # TODO: Trakt's response header's "Content-Type" parameter is sometimes set to "text/html",
-      #       which results in a String type being returned by response.parsed_response, but
-      #       HTTParty needs it to be "application/json" to correctly parse into an Array or Hash.
+      # TODO: Trakt's response header's "Content-Type" parameter is sometimes
+      #       set to "text/html", which results in a String type being returned
+      #       by response.parsed_response, but HTTParty needs it to be
+      #       "application/json" to correctly parse into an Array or Hash.
       #
       #       Endpoints with this issue are:
       #        - 'lists/items/add'

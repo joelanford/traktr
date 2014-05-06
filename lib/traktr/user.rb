@@ -1,28 +1,43 @@
 module Traktr
   class User < Endpoint
     def lastactivity(user = @client.username)
-      parse_response self.class.get('/' + File.join('lastactivity.json', @client.api_key, user), basic_auth: @auth)
+      parse_response self.class.get(
+       '/' + File.join('lastactivity.json', @client.api_key, user),
+       basic_auth: @auth
+      )
     end
 
     def list(slug, user = @client.username)
-      parse_response self.class.get('/' + File.join('list.json', @client.api_key, user, slug), basic_auth: @auth)
+      parse_response self.class.get(
+       '/' + File.join('list.json', @client.api_key, user, slug),
+       basic_auth: @auth
+      )
     end
 
     def lists(user = @client.username)
-      parse_response self.class.get('/' + File.join('lists.json', @client.api_key, user), basic_auth: @auth)
+      parse_response self.class.get(
+       '/' + File.join('lists.json', @client.api_key, user),
+       basic_auth: @auth
+      )
     end
 
     def profile(user = @client.username)
-      parse_response self.class.get('/' + File.join('profile.json', @client.api_key, user), basic_auth: @auth)
+      parse_response self.class.get(
+       '/' + File.join('profile.json', @client.api_key, user),
+       basic_auth: @auth
+      )
     end
 
     def watching(user = @client.username)
       #
-      # TODO : When the user is protected or not currently watching anything, this
-      #        returns an empty array. However, Trakt's documentation makes it seem
-      #        like an empty object will be returned
+      # TODO : When the user is protected or not currently watching anything,
+      #        this returns an empty array. However, Trakt's documentation
+      #        makes it seem like an empty object will be returned.
       #
-      parse_response self.class.get('/' + File.join('watching.json', @client.api_key, user), basic_auth: @auth)
+      parse_response self.class.get(
+        '/' + File.join('watching.json', @client.api_key, user),
+        basic_auth: @auth
+      )
     end
 
     def calendar

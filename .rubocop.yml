@@ -1,4 +1,10 @@
-inherit_from: rubocop-todo.yml
+# Offense count: 32
+Documentation:
+  Enabled: false
+
+# Offense count: 359
+#LineLength:
+#  Max: 202
 
 # Offense count: 4
 # Cop supports --auto-correct.
@@ -14,3 +20,4 @@ ParameterLists:
 # Configuration parameters: SupportedStyles.
 RaiseArgs:
   EnforcedStyle: compact
+
